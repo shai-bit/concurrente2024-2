@@ -1,8 +1,12 @@
 package kass.concurrente.contador;
 
+import java.util.logging.Logger;
+import java.util.logging.Level;
+
 public class Contador implements Runnable {
     public static final int RONDAS = 10000;
     private int valor;
+    private static final Logger LOGGER = Logger.getLogger(Contador.class.getName());
 
     /** Metodo constructor. */
     public Contador() {
@@ -27,7 +31,7 @@ public class Contador implements Runnable {
 
     @Override
     public void run() {
-        System.out.println("DENTRO RUN");
+        LOGGER.log(Level.INFO, "DENTRO RUN");
         suma();
     }
 
@@ -36,7 +40,13 @@ public class Contador implements Runnable {
      */
     public void suma() {
         for(int i = 0; i < RONDAS; ++i){
-            valor = valor + 1;
+            try {
+                this.valor += 1;
+                Thread.sleep(0, 5); // Dormimos cada thread tantito para disminuir la probabilidad de que haya race conditions.
+                LOGGER.log(Level.INFO, "{0} incrementó el contador a: {1}", new Object[]{Thread.currentThread().getName(), this.valor});
+            } catch (InterruptedException e){
+                Thread.currentThread().interrupt();
+            }
         }
     }
 
@@ -46,10 +56,10 @@ public class Contador implements Runnable {
         Thread h1 = new Thread(c,"1");
         Thread h2 = new Thread(c,"2");
 
-        h1.start();h2.start();
+        h1.start(); h2.start();
 
-        h1.join();h2.join();
+        h1.join(); h2.join();
 
-        System.out.println("EL VALOR ES: " + c.getValor());
+        LOGGER.log(Level.INFO, "EL VALOR ES: {0}", c.getValor());
     }
 }

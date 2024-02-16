@@ -18,7 +18,7 @@ class ContadorTest {
     }
 
     @Test
-    void ContadorTest() throws InterruptedException{
+    void ContadorTest1() throws InterruptedException{
         hilos[0].start();
         hilos[1].start();
         hilos[0].join();
