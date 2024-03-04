@@ -51,9 +51,8 @@ public class Habitacion {
                 this.prendido = false;
                 ((Vocero) prisionero).incrementaContador();
                 if (Contante.LOGS) LOGGER.log(Level.INFO, Contante.ROJO + "El contador del vocero va en: {0}" + Contante.RESET, new Object[]{((Vocero) prisionero).getContador()});
-                if (((Vocero) prisionero).checaTerminado()) {
-                    return false;
-                }
+                return !((Vocero) prisionero).checaTerminado();
+
             }
 
             //Prisionero entra al cuarto
@@ -68,6 +67,7 @@ public class Habitacion {
         } finally {
             lock.unlock();
         }
+        
     }
 
     public boolean isPrendido() {

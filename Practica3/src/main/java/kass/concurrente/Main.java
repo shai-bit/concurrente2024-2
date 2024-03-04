@@ -40,7 +40,6 @@ public class Main {
         for (int i = 2; i <= Contante.PRISIONEROS ; i++) {
             prisioneros.add(new Prisionero(i, false, false, habitacion));
         }
-
         for (Prisionero prisionero : prisioneros) {
             prisionero.start();
         }

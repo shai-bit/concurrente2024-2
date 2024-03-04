@@ -65,7 +65,7 @@ public class Prisionero extends Thread {
      * que todos los prisioneros han entrado al menos una vez a la habitación.
      */
     public void declaraVictoria() {
-        if (Contante.LOGS) LOGGER.log(Level.INFO, Contante.ROJO + "Todos los {0} prisioneros han entrado al menos una vez a la habitación" + Contante.RESET, new Object[]{Contante.PRISIONEROS - 1});
+        if (Contante.LOGS) LOGGER.log(Level.INFO, Contante.ROJO + "Todos los  prisioneros han entrado al menos una vez a la habitación" + Contante.RESET);
         Main.detenALosPrisioneros();
     }
 
