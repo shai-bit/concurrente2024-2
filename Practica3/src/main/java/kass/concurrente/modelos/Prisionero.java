@@ -5,8 +5,15 @@ import java.util.logging.Logger;
 
 import kass.concurrente.Main;
 import kass.concurrente.constantes.Contante;
+
 /**
- * Clase que modela un prisioner
+ * Clase que modela un prisionero dentro de un contexto de simulación de concurrencia.
+ * Cada prisionero puede ser o no el vocero, estar marcado si ya ha pasado por una habitación específica,
+ * y llevar un conteo de las veces que ha entrado a la habitación.
+ * <p>
+ * Esta clase extiende de {@link Thread}, permitiendo que cada prisionero opere en su propio hilo de ejecución.
+ * </p>
+ *
  * @version 1.0
  * @author LosNegritosDeIG
  */
@@ -19,10 +26,12 @@ public class Prisionero extends Thread {
     private static final Logger LOGGER = Logger.getLogger(Prisionero.class.getName());
 
     /**
-     * Metodo constructor para generar un prisionero
-     * @param id El identificador del prisionero
-     * @param esVocero true si es Vocero false en otro caso
-     * @param marcado true si ya paso
+     * Constructor para crear una instancia de Prisionero.
+     *
+     * @param id         El identificador único del prisionero.
+     * @param esVocero   Indica si el prisionero actuará como vocero ({@code true}) o no ({@code false}).
+     * @param marcado    Estado inicial del prisionero, si ya ha sido marcado previamente ({@code true}) o no ({@code false}).
+     * @param habitacion La habitación asignada al prisionero.
      */
     public Prisionero(Integer id, boolean esVocero, Boolean marcado, Habitacion habitacion) {
         this.id = id;
@@ -32,6 +41,11 @@ public class Prisionero extends Thread {
         this.vecesEnHabitacion = 0;
     }
 
+    /**
+     * Método que define la lógica de ejecución del prisionero cuando el hilo es iniciado.
+     * Aquí se maneja el proceso de entrar a la habitación y, en caso de ser el vocero,
+     * declarar la victoria si se cumplen ciertas condiciones.
+     */
     @Override
     public void run() {
         try {
@@ -46,10 +60,16 @@ public class Prisionero extends Thread {
         }
     }
     
+    /**
+     * Método utilizado por el vocero para declarar la victoria cuando se ha determinado
+     * que todos los prisioneros han entrado al menos una vez a la habitación.
+     */
     public void declaraVictoria() {
         if (Contante.LOGS) LOGGER.log(Level.INFO, Contante.ROJO + "Todos los {0} prisioneros han entrado al menos una vez a la habitación" + Contante.RESET, new Object[]{Contante.PRISIONEROS - 1});
         Main.detenALosPrisioneros();
     }
+
+    // Getters y setters para los atributos de la clase Prisionero.
 
     @Override
     public long getId() {
@@ -96,6 +116,9 @@ public class Prisionero extends Thread {
         this.vecesEnHabitacion = vecesEnHabitacion;
     }
 
+    /**
+     * Incrementa en uno el conteo de las veces que este prisionero ha entrado a la habitación.
+     */
     public void incrementaVecesEnHabitacion() {
         this.vecesEnHabitacion += 1;
     }
