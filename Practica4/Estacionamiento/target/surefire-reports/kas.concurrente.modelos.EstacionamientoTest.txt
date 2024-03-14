@@ -1,0 +1,7 @@
+-------------------------------------------------------------------------------
+Test set: kas.concurrente.modelos.EstacionamientoTest
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 16.036 s - in kas.concurrente.modelos.EstacionamientoTest
+conteoGlobalVecesEstacionado  Time elapsed: 7.007 s
+lugaresDisponiblesITest  Time elapsed: 0.002 s
+conteoVecesEstacionado  Time elapsed: 9.023 s
