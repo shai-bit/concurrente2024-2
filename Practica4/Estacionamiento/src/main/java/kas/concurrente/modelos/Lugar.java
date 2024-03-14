@@ -7,8 +7,10 @@ import java.util.logging.Level;
 
 /**
  * Representa un lugar individual dentro de un estacionamiento.
- * Cada lugar tiene un identificador único y puede estar disponible o no, dependiendo de si está ocupado por un carro.
- * La clase utiliza un semáforo para asegurar el acceso exclusivo a cada lugar por parte de los carros, evitando así condiciones de carrera.
+ * Cada lugar tiene un identificador único y puede estar disponible o no,
+ * dependiendo de si está ocupado por un carro.
+ * La clase utiliza un semáforo para asegurar el acceso exclusivo a cada lugar
+ * por parte de los carros, evitando así condiciones de carrera.
  */
 public class Lugar {
     private Integer id; // Identificador único para el lugar
@@ -29,17 +31,21 @@ public class Lugar {
 
     /**
      * Constructor vacío.
-     * Utilizado para instanciar un lugar sin asignarle un identificador inmediatamente.
+     * Utilizado para instanciar un lugar sin asignarle un identificador
+     * inmediatamente.
      */
     public Lugar() {
     }
 
     /**
      * Simula el proceso de un carro estacionándose en este lugar.
-     * Este método adquiere un permiso del semáforo, lo que garantiza que sólo un carro pueda ocupar el lugar a la vez.
-     * Registra cuántas veces se ha ocupado el lugar incrementando el contador de veces estacionado.
+     * Este método adquiere un permiso del semáforo, lo que garantiza que sólo un
+     * carro pueda ocupar el lugar a la vez.
+     * Registra cuántas veces se ha ocupado el lugar incrementando el contador de
+     * veces estacionado.
      *
-     * @throws InterruptedException si el hilo actual es interrumpido mientras espera el permiso del semáforo.
+     * @throws InterruptedException si el hilo actual es interrumpido mientras
+     *                              espera el permiso del semáforo.
      */
     public void estaciona() throws InterruptedException {
         semaforo.acquire();
@@ -55,10 +61,40 @@ public class Lugar {
     }
 
     /**
-     * Genera un tiempo de espera simulado para representar el carro ocupando el lugar.
+     * Simula el proceso de un carro estacionándose en este lugar.
+     * Este método adquiere un permiso del semáforo, lo que garantiza que sólo un
+     * carro pueda ocupar el lugar a la vez.
+     * Registra cuántas veces se ha ocupado el lugar incrementando el contador de
+     * veces estacionado.
+     *
+     * @throws InterruptedException si el hilo actual es interrumpido mientras
+     *                              espera el permiso del semáforo.
+     */
+    public void estacionaSinPastel() throws InterruptedException {
+        semaforo.acquire();
+        try {
+            disponible = false;
+            vecesEstacionado++; // Incrementa el contador al estacionarse
+            vePorPastel();
+        } finally {
+            LOGGER.log(Level.INFO, "\u001B[31mCarro en lugar {0} se ha estacionado.\u001B[0m", id);
+
+            // semaforo.release();
+        }
+    }
+
+    public void saleCarro() {
+        disponible = true; // Marca el lugar como disponible cuando el carro sale
+        LOGGER.log(Level.INFO, "\u001B[32mCarro en lugar {0} ha salido.\u001B[0m", id);
+    }
+
+    /**
+     * Genera un tiempo de espera simulado para representar el carro ocupando el
+     * lugar.
      * El tiempo de espera es pseudoaleatorio, entre 1 y 5 segundos.
      *
-     * @throws InterruptedException si el hilo es interrumpido mientras está en espera.
+     * @throws InterruptedException si el hilo es interrumpido mientras está en
+     *                              espera.
      */
     public void vePorPastel() throws InterruptedException {
         int espera = ThreadLocalRandom.current().nextInt(1, 6);
@@ -94,7 +130,8 @@ public class Lugar {
 
     /**
      * Devuelve el semáforo asociado a este lugar.
-     * Se utiliza para inspecciones o manipulaciones avanzadas del mecanismo de sincronización.
+     * Se utiliza para inspecciones o manipulaciones avanzadas del mecanismo de
+     * sincronización.
      *
      * @return El semáforo que controla el acceso al lugar.
      */

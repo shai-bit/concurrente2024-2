@@ -13,7 +13,8 @@ public class Estacionamiento {
     private Lugar[] lugares; // Arreglo de lugares disponibles en el estacionamiento
     private Semaphore semaforoLugares; // Semáforo para controlar el acceso a los lugares disponibles
     private int lugaresDisponibles; // Contador de lugares disponibles (no usado en la lógica actual)
-    private static final Logger LOGGER = Logger.getLogger(Estacionamiento.class.getName()); // Logger para registrar eventos
+    private static final Logger LOGGER = Logger.getLogger(Estacionamiento.class.getName()); // Logger para registrar
+                                                                                            // eventos
 
     /**
      * Constructor que inicializa el estacionamiento con una capacidad determinada.
@@ -28,7 +29,8 @@ public class Estacionamiento {
     }
 
     /**
-     * Inicializa los lugares del estacionamiento, asignando un identificador único a cada uno.
+     * Inicializa los lugares del estacionamiento, asignando un identificador único
+     * a cada uno.
      */
     private void inicializaLugares() {
         for (int i = 0; i < lugares.length; i++) {
@@ -37,16 +39,19 @@ public class Estacionamiento {
     }
 
     /**
-     * Comprueba si el estacionamiento está lleno basándose en la disponibilidad de permisos en el semáforo.
+     * Comprueba si el estacionamiento está lleno basándose en la disponibilidad de
+     * permisos en el semáforo.
      * 
-     * @return true si no hay permisos disponibles, lo que indica que el estacionamiento está lleno.
+     * @return true si no hay permisos disponibles, lo que indica que el
+     *         estacionamiento está lleno.
      */
     public boolean estaLleno() {
         return semaforoLugares.availablePermits() == 0;
     }
 
     /**
-     * Intenta ingresar un carro al estacionamiento. Bloquea si no hay lugares disponibles hasta que se libera un lugar.
+     * Intenta ingresar un carro al estacionamiento. Bloquea si no hay lugares
+     * disponibles hasta que se libera un lugar.
      * 
      * @param nombre El identificador del carro que intenta entrar.
      * @throws InterruptedException Si el hilo es interrumpido mientras espera.
@@ -57,11 +62,12 @@ public class Estacionamiento {
             int lugarAsignado = obtenLugar();
             if (lugarAsignado >= 0) {
                 asignaLugar(lugarAsignado);
-                String mensaje = "\u001B[34mEl carro de ID " + nombre + " ha entrado."+ "\u001B[0m";
-            LOGGER.log(Level.INFO, mensaje);
+                String mensaje = "\u001B[34mEl carro de ID " + nombre + " ha entrado." + "\u001B[0m";
+                LOGGER.log(Level.INFO, mensaje);
             }
         } finally {
-            // Nota: Considerar dónde y cómo se libera este permiso adecuadamente en el contexto de tu aplicación.
+            // Nota: Considerar dónde y cómo se libera este permiso adecuadamente en el
+            // contexto de tu aplicación.
             semaforoLugares.release();
         }
     }
@@ -77,7 +83,8 @@ public class Estacionamiento {
     }
 
     /**
-     * Método auxiliar para obtener el número de lugares disponibles basándose en el semáforo.
+     * Método auxiliar para obtener el número de lugares disponibles basándose en el
+     * semáforo.
      * No utilizado en la lógica actual, se mantiene para propósitos ilustrativos.
      * 
      * @return El número de permisos disponibles en el semáforo.

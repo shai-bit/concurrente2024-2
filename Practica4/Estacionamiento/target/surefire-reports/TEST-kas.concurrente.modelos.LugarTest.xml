@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="kas.concurrente.modelos.LugarTest" time="3.048" tests="2" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="kas.concurrente.modelos.LugarTest" time="7.076" tests="4" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="20"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -12,7 +12,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="MX"/>
     <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk-20.jdk/Contents/Home/lib"/>
-    <property name="sun.java.command" value="/Users/gera/Desktop/Practica4/Estacionamiento/target/surefire/surefirebooter8444452194450296496.jar /Users/gera/Desktop/Practica4/Estacionamiento/target/surefire 2024-03-13T21-37-48_712-jvmRun1 surefire13391770103951440538tmp surefire_07884093298658980937tmp"/>
+    <property name="sun.java.command" value="/Users/gera/Desktop/Practica4/Estacionamiento/target/surefire/surefirebooter8566518033449113824.jar /Users/gera/Desktop/Practica4/Estacionamiento/target/surefire 2024-03-14T12-25-31_675-jvmRun1 surefire9370871613762537184tmp surefire_03510619185024320198tmp"/>
     <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="/Users/gera/Desktop/Practica4/Estacionamiento/target/test-classes:/Users/gera/Desktop/Practica4/Estacionamiento/target/classes:/Users/gera/.m2/repository/org/junit/jupiter/junit-jupiter/5.5.1/junit-jupiter-5.5.1.jar:/Users/gera/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.5.1/junit-jupiter-api-5.5.1.jar:/Users/gera/.m2/repository/org/apiguardian/apiguardian-api/1.1.0/apiguardian-api-1.1.0.jar:/Users/gera/.m2/repository/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar:/Users/gera/.m2/repository/org/junit/platform/junit-platform-commons/1.5.1/junit-platform-commons-1.5.1.jar:/Users/gera/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.5.1/junit-jupiter-params-5.5.1.jar:/Users/gera/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.5.1/junit-jupiter-engine-5.5.1.jar:/Users/gera/.m2/repository/org/junit/platform/junit-platform-engine/1.5.1/junit-platform-engine-1.5.1.jar:"/>
@@ -29,7 +29,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="apple.awt.application.name" value="ForkedBooter"/>
-    <property name="surefire.real.class.path" value="/Users/gera/Desktop/Practica4/Estacionamiento/target/surefire/surefirebooter8444452194450296496.jar"/>
+    <property name="surefire.real.class.path" value="/Users/gera/Desktop/Practica4/Estacionamiento/target/surefire/surefirebooter8566518033449113824.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.runtime.version" value="20.0.2+9-78"/>
@@ -58,5 +58,7 @@
     <property name="java.class.version" value="64.0"/>
   </properties>
   <testcase name="constructorTest" classname="kas.concurrente.modelos.LugarTest" time="0.007"/>
-  <testcase name="estacionaTest" classname="kas.concurrente.modelos.LugarTest" time="3.038"/>
+  <testcase name="lugarNoDisponibleDespuesDeEstacionar" classname="kas.concurrente.modelos.LugarTest" time="3.047"/>
+  <testcase name="lugarDisponibleDespuesDeSalirCarro" classname="kas.concurrente.modelos.LugarTest" time="0.002"/>
+  <testcase name="estacionaTest" classname="kas.concurrente.modelos.LugarTest" time="4.01"/>
 </testsuite>
