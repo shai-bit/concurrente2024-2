@@ -24,9 +24,9 @@ public class Filtro implements Semaphore {
     public Filtro(int hilos, int maxHilosConcurrentes) {
         this.hilos = hilos;
         this.maxHilosConcurrentes = maxHilosConcurrentes;
-        this.level = new int[hilos];
-        this.victim = new int[hilos];
-        for (int i = 0; i < hilos; i++) {
+        this.level = new int[hilos - 1]; // hilos - 1 porque el último nada más lo usan de verificación en los tests
+        this.victim = new int[hilos - 1];
+        for (int i = 0; i < hilos - 1; i++) {
             level[i] = 0;
         }
     }
@@ -40,36 +40,36 @@ public class Filtro implements Semaphore {
     public void acquire() {
         int threadId = getThreadId();
 
-        for (int i = 1; i < hilos; i++) {
+        for (int i = 1; i < hilos - 1; i++) {
             level[threadId] = i;
             victim[i] = threadId;
             boolean found;
-            System.out.printf("Thread %d, en ronda %d", threadId, i);
             do {
                 found = false;
-                for (int k = 0; k < hilos; k++) {
+                for (int k = 0; k < hilos - 1; k++) {
                     if (k != threadId && level[k] >= i && victim[i] == threadId) {
                         found = true;
                         break;
                     }
                 }
-                if (countThreadsInCriticalSection(i) >= maxHilosConcurrentes) {
-                    found = true;
-                }
+                // if (countThreadsInCriticalSection(i) >= maxHilosConcurrentes) {
+                //     found = true;
+                // }
             } while (found);
         }
     }
 
     @Override
     public void release() {
-        int threadId = (int) Thread.currentThread().getId() % hilos;
-        level[threadId] = 0; // Leave the critical section, making it available for others
+        int threadId = getThreadId();
+        level[threadId] = 0;
     }
 
     private int getThreadId() {
         return Integer.parseInt(Thread.currentThread().getName());
     }
 
+    // No estoy seguro si este método nos ayudará para lo de m hilos en la sección crítica
     private int countThreadsInCriticalSection(int currentLevel) {
         int count = 0;
         for (int lvl : level) {
