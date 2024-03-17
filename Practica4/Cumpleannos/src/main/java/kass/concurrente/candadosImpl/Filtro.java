@@ -85,6 +85,10 @@ public class Filtro implements Semaphore {
         return Integer.parseInt(Thread.currentThread().getName());
     }
 
+    /*
+     * Método auxiliar para adquirir el candado interno que 
+     * gestiona el acceso a recursos compartidos internos.
+     */
     private void acquireInternalLock() {
         while (true) {
             if (!lock) {
@@ -97,6 +101,10 @@ public class Filtro implements Semaphore {
         }
     }
     
+    /*
+     * Método auxiliar para liberar el candado interno que  
+     * gestiona el acceso a recursos compartidos internos.
+     */
     private void releaseInternalLock() {
         lock = false;
     }
