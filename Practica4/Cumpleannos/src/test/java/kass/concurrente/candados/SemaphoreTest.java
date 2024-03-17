@@ -28,7 +28,7 @@ public class SemaphoreTest {
     }
 
     void initFiltroSemaforo(){
-        semaforo = new Filtro(HILOS, MAX_HILOS_CONCURRENTES);
+        semaforo = new Filtro(HILOS - 1, MAX_HILOS_CONCURRENTES);
     }
 
     void initThreads(){

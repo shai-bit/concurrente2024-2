@@ -26,11 +26,11 @@ public class Filtro implements Semaphore {
     public Filtro(int hilos, int maxHilosConcurrentes) {
         this.hilos = hilos;
         this.maxHilosConcurrentes = maxHilosConcurrentes;
-        this.level = new int[hilos - 1]; // hilos - 1 porque el último nada más lo usan de verificación en los tests
-        this.victim = new int[hilos - 1];
+        this.level = new int[hilos];
+        this.victim = new int[hilos];
         this.enSeccionCritica = 0;
         this.lock = false;
-        for (int i = 0; i < hilos - 1; i++) {
+        for (int i = 0; i < hilos; i++) {
             level[i] = 0;
         }
     }
@@ -44,7 +44,7 @@ public class Filtro implements Semaphore {
     public void acquire() {
         int threadId = getThreadId();
         
-        for (int i = 1; i < hilos - 1; i++) {
+        for (int i = 1; i < hilos; i++) {
             acquireInternalLock();
             level[threadId] = i;
             victim[i] = threadId;
@@ -52,7 +52,7 @@ public class Filtro implements Semaphore {
             boolean conflict;
             do {
                 conflict = false;
-                for (int k = 0; k < hilos - 1; k++) {
+                for (int k = 0; k < hilos; k++) {
                     if (k != threadId && level[k] >= i && victim[i] == threadId) {
                         conflict = true;
                         break;
