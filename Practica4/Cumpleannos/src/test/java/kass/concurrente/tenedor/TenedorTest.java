@@ -51,5 +51,11 @@ public class TenedorTest {
         assertTrue(stringBuffer.toString().matches("^(ab|cd)+$"));
         assertEquals(2*RONDAS, tenedor.getVecesTomado());
     }
+
+    // Test adicional para verificar que el ID del tenedor se establece correctamente.
+    @Test
+    void tenedorIdTest() {
+        assertEquals(1, tenedor.getId());
+    }
     
 }

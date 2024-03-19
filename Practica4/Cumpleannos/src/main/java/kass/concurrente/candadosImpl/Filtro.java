@@ -84,6 +84,7 @@ public class Filtro implements Semaphore {
     private int getThreadId() {
         return Integer.parseInt(Thread.currentThread().getName());
     }
+    
 
     /*
      * Método auxiliar para adquirir el candado interno que 

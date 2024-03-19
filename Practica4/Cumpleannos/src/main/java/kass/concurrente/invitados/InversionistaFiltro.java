@@ -1,33 +1,20 @@
 package kass.concurrente.invitados;
 
+import kass.concurrente.candados.Semaphore;
+
 /**
- * Clase que modela al inversionista, pero esta vez
- * usando el filtro.
- * No se sobreescribe el run, si hicieron bien las cosas
- * Entonces se pasara sin problemas para aca
- * Good Luck!
- * @version 1.1
+ * Clase que modela un Inversionista que utiliza el algoritmo de Filtro para evitar el interbloqueo.
  * @author Kassandra Mirael
+ * @version 1.0
  */
 public class InversionistaFiltro extends Inversionista {
 
-    @Override
-    public void entraALaMesa(){
-
+    public InversionistaFiltro(Semaphore semaphore) {
+        super(semaphore);
     }
 
     @Override
-    public void tomaTenedores() {
-        /**
-         * Aqui va tu codigo
-         */
+    protected void comer() {
+        super.comer();
     }
-
-    @Override
-    public void sueltaTenedores() {
-        /**
-         * Aqui va tu codigo
-         */
-    }
-    
 }

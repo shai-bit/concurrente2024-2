@@ -2,20 +2,12 @@ package kass.concurrente.candadosImpl;
 
 import kass.concurrente.candados.Lock;
 
-/**
- * Clase que implementa el candado usando el Legendario
- * algoritmo de PeterGod.
- * No hay mucho que decir, ya saben que hacer
- * @version 1.0
- * @author Kassandra Mirael
- */
 public class PetersonLock implements Lock {
     private volatile boolean[] flag = new boolean[2];
     private volatile int turn;
 
-    @Override
-    public void lock() {
-        int id = getThreadId();
+    // Acepta un índice de hilo como argumento
+    public void lock(int id) {
         int otherId = 1 - id;
         flag[id] = true;
         turn = otherId;
@@ -25,14 +17,18 @@ public class PetersonLock implements Lock {
         }
     }
 
-    @Override
-    public void unlock() {
-        int id = getThreadId();
+    // Acepta un índice de hilo como argumento para unlock también
+    public void unlock(int id) {
         flag[id] = false;
     }
 
-    private int getThreadId() {
-        return Integer.parseInt(Thread.currentThread().getName());
+    // Los métodos lock y unlock sin argumentos se mantienen para cumplir con la interfaz Lock,
+    // pero no se utilizarán en esta implementación.
+    @Override
+    public void lock() {
     }
-    
+
+    @Override
+    public void unlock() {
+    }
 }

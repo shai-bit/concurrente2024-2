@@ -1,6 +1,7 @@
 package kass.concurrente;
 
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -106,5 +107,11 @@ public class MesaTest {
         for(Thread t : hilos){
             t.join();
         }
+    }
+
+    // Test adicional para verificar que el número de tenedores se inicializa correctamente.
+    @Test
+    void numeroTenedoresTest() {
+        assertEquals(TAM_MESA, tenedores.length);
     }
 }
