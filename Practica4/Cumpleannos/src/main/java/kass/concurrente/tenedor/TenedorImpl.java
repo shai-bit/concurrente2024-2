@@ -1,6 +1,12 @@
 package kass.concurrente.tenedor;
 
 import kass.concurrente.candadosImpl.PetersonLock;
+/**
+ * Implementación concreta de la interfaz {@code Tenedor} que utiliza el algoritmo de bloqueo de Peterson
+ * para gestionar el acceso concurrente. Esta clase representa un "tenedor" en el problema clásico de los
+ * inversionistas comensales, permitiendo que sólo un hilo (o inversionista) tome el tenedor a la vez.
+ * 
+ */
 
 public class TenedorImpl implements Tenedor {
     private int id;
@@ -15,7 +21,7 @@ public class TenedorImpl implements Tenedor {
 
     @Override
     public void tomar() {
-        int threadIndex = getThreadIndex(); // Potencial condición de carrera aquí.
+        int threadIndex = getThreadIndex(); 
         lock.lock(threadIndex);
         vecesTomado++;
     }
@@ -45,6 +51,13 @@ public class TenedorImpl implements Tenedor {
         this.vecesTomado = vecesTomado;
     }
 
+     /**
+     * Determina el índice del hilo actual para el bloqueo de Peterson. Este método gestiona la asignación
+     * de los hilos a los índices 0 o 1, necesarios para el algoritmo de bloqueo de Peterson.
+     *
+     * @return El índice asignado al hilo actual, o -1 si se produce un error inesperado.
+     */
+    
     private int getThreadIndex() {
         long currentThreadId = Thread.currentThread().getId();
         if (threadIds[0] == -1) {
@@ -58,6 +71,6 @@ public class TenedorImpl implements Tenedor {
         } else if (threadIds[1] == currentThreadId) {
             return 1;
         }
-        return -1; // Este caso no debería ocurrir.
+        return -1; 
     }
 }
