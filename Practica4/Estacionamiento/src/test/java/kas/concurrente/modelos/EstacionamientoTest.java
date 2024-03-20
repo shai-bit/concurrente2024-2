@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 public class EstacionamientoTest {
     Estacionamiento es;
-    final static int NUMLUGARES = 3;
+    final static int NUMLUGARES = 4;
     List<Thread> hilos;
 
     @BeforeEach
@@ -70,8 +70,8 @@ public class EstacionamientoTest {
      */
     @Test
     void estacionamientoSeMarcaComoLleno() throws InterruptedException {
-        // Estaciona un número de carros igual a la capacidad del estacionamiento.
-        for (int i = 0; i < NUMLUGARES; i++) {
+        int carritos = 5;
+        for (int i = 0; i < carritos; i++) {
             new Thread(() -> {
                 try {
                     es.entraCarro(ThreadLocalRandom.current().nextInt(1000));
