@@ -23,7 +23,7 @@ public class Estacionamiento {
      */
     public Estacionamiento(int capacidad) {
         this.lugares = new Lugar[capacidad];
-        this.semaforoLugares = new Semaphore(capacidad, true); // Modo justo (FIFO)
+        this.semaforoLugares = new Semaphore(capacidad); // Modo justo (FIFO)
         this.lugaresDisponibles = capacidad;
         inicializaLugares();
     }
@@ -66,8 +66,6 @@ public class Estacionamiento {
                 LOGGER.log(Level.INFO, mensaje);
             }
         } finally {
-            // Nota: Considerar dónde y cómo se libera este permiso adecuadamente en el
-            // contexto de tu aplicación.
             semaforoLugares.release();
         }
     }

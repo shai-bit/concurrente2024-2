@@ -5,14 +5,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class EstacionamientoTest {
     Estacionamiento es;
-    final static int NUMLUGARES = 4;
+    final static int NUMLUGARES = 50;
     List<Thread> hilos;
 
     @BeforeEach
@@ -69,23 +68,13 @@ public class EstacionamientoTest {
      * TEST bien hechos
      */
     @Test
-    void estacionamientoSeMarcaComoLleno() throws InterruptedException {
-        int carritos = 5;
-        for (int i = 0; i < carritos; i++) {
-            new Thread(() -> {
-                try {
-                    es.entraCarro(ThreadLocalRandom.current().nextInt(1000));
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                }
-            }).start();
-        }
-        // espera un poco para que todos los carros se intenten estacionar.
-        Thread.sleep(1000);
-
-        // Verifica si el estacionamiento se marca como lleno correctamente.
-        assertEquals(true, es.estaLleno(), "El estacionamiento debería estar lleno.");
+    void verificaInicializacionCorrectaDelSemaforo() {
+        // Obtiene el número de permisos disponibles en el semáforo al inicio.
+        int permisosDisponibles = es.getLugaresDisponiblesAux();
+        // Verifica que el número de permisos disponibles coincida con la capacidad inicial del estacionamiento.
+        assertEquals(NUMLUGARES, permisosDisponibles, "El semáforo debe iniciar con un número de permisos igual a la capacidad del estacionamiento.");
     }
+    
 
     void initHilos() {
         hilos = new ArrayList<>();

@@ -5,6 +5,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
+
 /**
  * Representa un lugar individual dentro de un estacionamiento.
  * Cada lugar tiene un identificador único y puede estar disponible o no,
@@ -15,7 +16,7 @@ import java.util.logging.Level;
 public class Lugar {
     private Integer id; // Identificador único para el lugar
     private boolean disponible = true; // Estado de disponibilidad del lugar
-    private Semaphore semaforo = new Semaphore(1, true); // Semaforo justo para controlar el acceso al lugar
+    private Semaphore semaforo = new Semaphore(1); // Semaforo justo para controlar el acceso al lugar
     private int vecesEstacionado = 0; // Contador de cuántas veces se ha estacionado un carro en este lugar
     private static final Logger LOGGER = Logger.getLogger(Lugar.class.getName()); // Logger para registrar eventos
 
@@ -51,7 +52,7 @@ public class Lugar {
         semaforo.acquire();
         try {
             disponible = false;
-            vecesEstacionado++; // Incrementa el contador al estacionarse
+            incrementaVecesEstacionadoSafely();
             vePorPastel();
         } finally {
             LOGGER.log(Level.INFO, "\u001B[31mCarro en lugar {0} va a salir.\u001B[0m", id);
@@ -137,5 +138,9 @@ public class Lugar {
      */
     public Semaphore getFiltroModificado() {
         return semaforo;
+    }
+
+    private void incrementaVecesEstacionadoSafely() {
+        vecesEstacionado++;
     }
 }

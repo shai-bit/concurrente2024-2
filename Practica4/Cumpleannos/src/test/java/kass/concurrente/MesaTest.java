@@ -69,22 +69,23 @@ public class MesaTest {
         ejecutaHilos();
     }
 
-    void inicializaInversionistas(Class<? extends Inversionista> clazz){
-        semaforo = new Filtro(TAM_MESA, TAM_MESA-1);
+    void inicializaInversionistas(Class<? extends Inversionista> clazz) {
+        semaforo = new Filtro(TAM_MESA, TAM_MESA - 1);
         inversionistas = new Inversionista[TAM_MESA];
-
-        try{
-            Class[] cArg = new Class[] {Semaphore.class};
-            for(int i = 0; i < TAM_MESA; ++i){
+    
+        try {
+            Class<?>[] cArg = new Class<?>[] {Semaphore.class};
+            for (int i = 0; i < TAM_MESA; ++i) {
                 inversionistas[i] = clazz.getDeclaredConstructor(cArg).newInstance(semaforo);
                 inversionistas[i].setId(i);
                 inversionistas[i].setTenedorIzq(tenedores[i]);
-                inversionistas[i].setTenedorDer(tenedores[(i+1)%TAM_MESA]);
+                inversionistas[i].setTenedorDer(tenedores[(i + 1) % TAM_MESA]);
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
+    
 
     void initHilos(){
         hilos = new Thread[TAM_MESA];
