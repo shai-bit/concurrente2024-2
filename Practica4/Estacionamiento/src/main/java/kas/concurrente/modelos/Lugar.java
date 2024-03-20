@@ -80,7 +80,6 @@ public class Lugar {
         } finally {
             LOGGER.log(Level.INFO, "\u001B[31mCarro en lugar {0} se ha estacionado.\u001B[0m", id);
 
-            // semaforo.release();
         }
     }
 
@@ -99,7 +98,7 @@ public class Lugar {
      */
     public void vePorPastel() throws InterruptedException {
         int espera = ThreadLocalRandom.current().nextInt(1, 6);
-        Thread.sleep(espera * 1000);
+        Thread.sleep((long) espera * 1000); 
     }
 
     /**
