@@ -20,12 +20,4 @@ public class InversionistaFiltro extends Inversionista {
         super(semaphore);
     }
 
-    /**
-     * Realiza la acción de comer, utilizando la implementación base de la clase 
-     * y permitiendo la incorporación del algoritmo de Filtro para gestionar el acceso a los tenedores.
-     */
-    @Override
-    protected void comer() {
-        super.comer();
-    }
 }

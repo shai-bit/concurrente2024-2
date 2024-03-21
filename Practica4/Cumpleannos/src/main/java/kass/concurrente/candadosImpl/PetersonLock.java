@@ -4,7 +4,7 @@ import kass.concurrente.candados.Lock;
 
 public class PetersonLock implements Lock {
     private volatile boolean[] flag = new boolean[2];
-    private volatile int turn;
+    private volatile int turn; // Es necesaria (ingorar el error de sonarlint)
 
     // Acepta un índice de hilo como argumento
     public void lock(int id) {
@@ -22,13 +22,21 @@ public class PetersonLock implements Lock {
         flag[id] = false;
     }
 
-    // Los métodos lock y unlock sin argumentos se mantienen para cumplir con la interfaz Lock,
-    // pero no se utilizarán en esta implementación.
+   
     @Override
     public void lock() {
+        /**
+         * Los métodos lock y unlock sin argumentos se mantienen para cumplir con la interfaz Lock,
+         * pero no se utilizarán en esta implementación.
+         */
+    
     }
 
     @Override
     public void unlock() {
+        /**
+         * Los métodos lock y unlock sin argumentos se mantienen para cumplir con la interfaz Lock,
+         * pero no se utilizarán en esta implementación.
+         */
     }
 }

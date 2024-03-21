@@ -6,7 +6,7 @@ import kass.concurrente.candados.Semaphore;
  * Clase que modela el Algoritmo del Filtro Modificado
  * Este algoritmo es similar al del filtro, lo diferente es que
  * permite una cantidad m de hilos SIMULTANEOS en la seccion critica
- * Todo es casi igual, solo realiza la modificacion pertinente para esto
+ * Es casi igual, solo realiza la modificacion pertinente para esto
  * @version 1.0
  * @author Kassandra Mirael
  */
@@ -92,12 +92,10 @@ public class Filtro implements Semaphore {
      */
     private void acquireInternalLock() {
         while (true) {
+            // Intenta adquirir el candado solo si está disponible (es decir, cuando lock es falso)
             if (!lock) {
-                lock = true;
-                if (!lock) { // checamos dos veces
-                    continue;
-                }
-                break;
+                lock = true; // Adquiere el candado
+                break; // Sale del ciclo una vez que el candado ha sido adquirido
             }
         }
     }
