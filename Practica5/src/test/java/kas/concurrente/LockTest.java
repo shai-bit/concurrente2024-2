@@ -68,12 +68,10 @@ public class LockTest {
         ejecutaPrueba(new BackoffLock());
     }
     
-    /* 
     @Test
     void clhLock() throws InterruptedException {
         ejecutaPrueba(new CLHLock());
     }
-    */
 
     @Test
     void mcsLock() throws InterruptedException {
