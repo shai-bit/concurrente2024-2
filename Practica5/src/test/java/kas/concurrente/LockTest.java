@@ -79,13 +79,11 @@ public class LockTest {
     void mcsLock() throws InterruptedException {
         ejecutaPrueba(new MCSLock());
     }
-    /* 
+    
     @Test
     void aLock() throws InterruptedException {
         ejecutaPrueba(new ALock(HILOS));
     }
-
-    */
 }
 
 /**
