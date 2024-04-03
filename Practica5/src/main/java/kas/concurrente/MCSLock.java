@@ -18,7 +18,9 @@ public class MCSLock implements Lock {
             qnode.locked = true;
             pred.next = qnode;
             // wait until predecessor gives up the lock
-            while (qnode.locked) {}
+            while (qnode.locked) {
+                Thread.yield();
+            }
         }
     }
 
